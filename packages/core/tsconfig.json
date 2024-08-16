@@ -4,6 +4,7 @@
     "lib": ["es2022", "DOM"],
     // 只编译不输出
     "noEmit": false,
+    // 模块输出
     "isolatedModules": true,
     "moduleResolution": "nodenext",
     "module": "nodenext",
@@ -13,8 +14,8 @@
     "sourceMap": true,
     // 去除注释
     "removeComments": true,
-    "target": "ES2015"
+    "target": "ES2016"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts","src/index.ts"],
   "exclude": [""]
 }

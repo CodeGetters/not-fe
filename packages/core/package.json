@@ -19,6 +19,16 @@
     "dev":"tsc -w",
     "test": "node ./__tests__/core.test.js"
   },
+  "exports": {
+    ".":{
+      "types":"./types/index.d.ts",
+      "default":"./dist/index.js"
+    },
+    "./Promise":{
+      "types":"./types/Promise/index.d.ts",
+      "default":"./dist/Promise/index.js"
+    }
+  },
   "bugs": {
     "url": "https://github.com/CodeGetters/nativeFunImple/issues"
   }
