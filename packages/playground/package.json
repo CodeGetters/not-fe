@@ -13,9 +13,6 @@
   "files": [
     "lib"
   ],
-  "publishConfig": {
-    "registry": "https://ccc-npm.leihuo.netease.com/"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeGetters/nativeFunImple.git"
@@ -25,5 +22,8 @@
   },
   "bugs": {
     "url": "https://github.com/CodeGetters/nativeFunImple/issues"
+  },
+  "dependencies": {
+    "@repo/core":"workspace:*"
   }
 }

@@ -1,26 +1,22 @@
 {
   "name": "@repo/core",
   "version": "0.0.0",
+  "private":"false",
   "description": "> TODO: description",
   "author": "CodeGetters <reday_king@163.com>",
   "homepage": "https://github.com/CodeGetters/nativeFunImple#readme",
   "license": "MIT",
   "main": "lib/core.js",
   "directories": {
-    "lib": "lib",
     "test": "__tests__"
   },
-  "files": [
-    "lib"
-  ],
-  "publishConfig": {
-    "registry": "https://ccc-npm.leihuo.netease.com/"
-  },
+  "files": ["dist"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeGetters/nativeFunImple.git"
   },
   "scripts": {
+    "dev":"tsc -w",
     "test": "node ./__tests__/core.test.js"
   },
   "bugs": {

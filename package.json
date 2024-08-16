@@ -1,5 +1,6 @@
 {
-  "name": "repo",
+  "name": "root",
+  "private":"true",
   "version": "1.0.0",
   "description": "Native function implementation",
   "main": "index.js",
@@ -9,7 +10,8 @@
     "prepare": "husky",
     "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}",
     "test": "jest",
-    "tsc": "tsc -w"
+    "tsc": "tsc -w",
+    "check-types": "tsc --noEmit"
   },
   "config": {
     "commitizen": {
@@ -44,7 +46,6 @@
     "@types/jest": "^29.5.12",
     "babel-jest": "^29.7.0",
     "cz-git": "^1.9.4",
-    "eslint": "^9.9.0",
     "husky": "^9.1.4",
     "jest": "^29.7.0",
     "lerna": "^8.1.8",
