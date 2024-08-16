@@ -36,7 +36,7 @@ class Promise {
       reject(error);
     }
   }
-  then(onFulfilled, onRejected) {
+  then(onFulfilled: (value) => void, onRejected: (reason) => void) {
     if (this.status === STATUS.FULFILLED) {
       onFulfilled(this.value);
     }
@@ -44,6 +44,12 @@ class Promise {
       onRejected(this.reason);
     }
     if (this.status === STATUS.PENDING) {
+      this.onResolveCall.push(() => {
+        onFulfilled(this.value);
+      });
+      this.onRejectCall.push(() => {
+        onRejected(this.reason);
+      });
     }
   }
   catch(reason) {}
