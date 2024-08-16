@@ -1,0 +1,45 @@
+{
+  "name": "nativeFunImple",
+  "version": "1.0.0",
+  "description": "Native function implementation",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "lint-staged": "npx lint-staged",
+    "prepare": "husky",
+    "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  },
+  "lint-staged": {
+    "*.{js,vue,ts,jsx,tsx}": [
+      "prettier --write"
+    ],
+    "*.{html,css,less,scss,md}": [
+      "prettier --write"
+    ]
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "keywords": [],
+  "author": "CodeGetters",
+  "license": "MIT",
+  "devDependencies": {
+    "@changesets/cli": "^2.27.7",
+    "@commitlint/cli": "^19.4.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "cz-git": "^1.9.4",
+    "eslint": "^9.9.0",
+    "husky": "^9.1.4",
+    "lint-staged": "^15.2.9",
+    "prettier": "^3.3.3"
+  }
+}
