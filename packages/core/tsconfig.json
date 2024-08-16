@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "lib": ["es2022", "DOM"],
+    // 只编译不输出
+    "noEmit": false,
+    "isolatedModules": true,
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+    "declaration": true,
+    "declarationDir": "./types",
+    "outDir": "./dist",
+    "sourceMap": true,
+    // 去除注释
+    "removeComments": true,
+    "target": "ES2015"
+  },
+  "include": ["./**/*.ts"],
+  "exclude": [""]
+}

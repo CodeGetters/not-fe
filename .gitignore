@@ -62,14 +62,8 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# admin
-.umirc.local.ts
-config.local.ts
-.umi
-.umi-production
-.umi-test
-.umi
-.umi-production
-.umi-test
-.mfsu
-.swc
+# typescript
+types
+
+# turbo
+.turbo
