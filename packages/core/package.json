@@ -5,7 +5,7 @@
   "type": "module",
   "description": "> TODO: description",
   "author": "CodeGetters <reday_king@163.com>",
-  "homepage": "https://github.com/CodeGetters/nativeFunImple#readme",
+  "homepage": "https://github.com/CodeGetters/note-fe#readme",
   "license": "MIT",
   "scripts": {
     "dev": "tsc -w",
@@ -18,7 +18,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CodeGetters/nativeFunImple.git"
+    "url": "git+https://github.com/CodeGetters/note-fe.git"
   },
   "main": "./dist/index.js",
   "exports": {
@@ -34,6 +34,6 @@
     }
   },
   "bugs": {
-    "url": "https://github.com/CodeGetters/nativeFunImple/issues"
+    "url": "https://github.com/CodeGetters/note-fe/issues"
   }
 }
