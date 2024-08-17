@@ -1,3 +1,17 @@
 {
-  "$schema": "https://turbo.build/schema.json"
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "dev": { "cache": true },
+    "build": {
+      "cache": false,
+      "dependsOn": ["build:esm", "build:cjs"]
+    },
+    "build:esm": {
+      "cache": false
+    },
+    "build:cjs": {
+      "cache": false,
+      "dependsOn": ["build:esm"]
+    }
+  }
 }

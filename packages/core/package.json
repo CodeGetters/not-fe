@@ -1,32 +1,36 @@
 {
   "name": "@repo/core",
   "version": "0.0.0",
-  "private":"false",
+  "private": "false",
+  "type": "module",
   "description": "> TODO: description",
   "author": "CodeGetters <reday_king@163.com>",
   "homepage": "https://github.com/CodeGetters/nativeFunImple#readme",
   "license": "MIT",
-  "main": "lib/core.js",
-  "directories": {
-    "test": "__tests__"
+  "scripts": {
+    "dev": "tsc -w",
+    "build:esm": "tsc",
+    "build:cjs": "babel ./dist/* --out-dir ./dist/cjs",
+    "test": "node ./__tests__/core.test.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeGetters/nativeFunImple.git"
   },
-  "scripts": {
-    "dev":"tsc -w",
-    "test": "node ./__tests__/core.test.js"
-  },
+  "main": "./dist/index.js",
   "exports": {
-    ".":{
-      "types":"./types/index.d.ts",
-      "default":"./dist/index.js"
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./dist/cjs/index.cjs",
+      "import": "./dist/esm/index.js"
     },
-    "./Promise":{
-      "types":"./types/Promise/index.d.ts",
-      "default":"./dist/Promise/index.js"
+    "./Promise": {
+      "types": "./types/Promise/index.d.ts",
+      "default": "./dist/cjs/Promise/index.cjs",
+      "import": "./dist/esm/index.js"
     }
   },
   "bugs": {

@@ -1,4 +1,4 @@
-export enum STATUS {
+enum STATUS {
   REJECTED = "REJECTED",
   FULFILLED = "FULFILLED",
   PENDING = "PENDING",

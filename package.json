@@ -1,6 +1,6 @@
 {
   "name": "root",
-  "private":"true",
+  "private": "true",
   "version": "1.0.0",
   "description": "Native function implementation",
   "main": "index.js",
@@ -9,8 +9,9 @@
     "lint-staged": "npx lint-staged",
     "prepare": "husky",
     "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}",
+    "start": "turbo run dev--filter=@repo/core",
+    "build": "turbo run build",
     "test": "jest",
-    "tsc": "tsc -w",
     "check-types": "tsc --noEmit"
   },
   "config": {
@@ -37,6 +38,7 @@
   "author": "CodeGetters",
   "license": "MIT",
   "devDependencies": {
+    "@babel/cli": "^7.24.8",
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.3",
     "@babel/preset-typescript": "^7.24.7",
@@ -55,5 +57,6 @@
     "ts-node": "^10.9.2",
     "turbo": "^2.0.14",
     "typescript": "^5.5.4"
-  }
+  },
+  "packageManager": "pnpm@9.4.0"
 }

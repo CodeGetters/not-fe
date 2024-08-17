@@ -1,21 +1,26 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "lib": ["es2022", "DOM"],
+    "lib": ["ES2020", "DOM"],
     // 只编译不输出
     "noEmit": false,
-    // 模块输出
+    // 每个文件都作为单独模块输出
     "isolatedModules": true,
-    "moduleResolution": "nodenext",
-    "module": "nodenext",
+    "moduleResolution": "Node",
+    // 生成ECMAScript模块
+    "module": "ESNext",
+    // 生成声明文件
     "declaration": true,
+    // 生命文件输出地址
     "declarationDir": "./types",
-    "outDir": "./dist",
+    // 编译后输出地址
+    "outDir": "./dist/esm",
+    // 生成source map
     "sourceMap": true,
     // 去除注释
     "removeComments": true,
-    "target": "ES2016"
+    "target": "ES2015"
   },
-  "include": ["src/**/*.ts","src/index.ts"],
+  "include": ["src/**/*.ts", "src/index.ts"],
   "exclude": [""]
 }
