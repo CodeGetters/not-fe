@@ -1,8 +1,8 @@
-import Promise from "@repo/core";
-
+// import { Promise } from "@repo/core/Promise";
+const { Promise } = require("@repo/core");
 let promise = new Promise((resolve, reject) => {
   console.log("promise resolve");
-  resolve("ok");
+  // resolve("ok");
 });
 
 console.log("promise start");

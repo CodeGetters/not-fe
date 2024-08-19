@@ -1,7 +1,4 @@
-import Promise from "./Promise";
-import EventBus from "./EventBus";
+import Promise from "./Promise/index.ts";
+import EventBus from "./EventBus/index.ts";
 
-export default {
-  Promise,
-  EventBus,
-};
+export { Promise, EventBus };

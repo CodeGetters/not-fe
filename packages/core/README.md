@@ -1,11 +1,3 @@
 # `core`
 
-> TODO: description
-
-## Usage
-
-```
-const core = require('core');
-
-// TODO: DEMONSTRATE API
-```
+目前只存放JavaScript的相关代码。

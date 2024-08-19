@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "tsc -w",
     "build:esm": "tsc",
-    "build:cjs": "babel ./dist/* --out-dir ./dist/cjs",
+    "build": "rollup -c",
     "test": "node ./__tests__/core.test.js"
   },
   "files": [
@@ -20,7 +20,8 @@
     "type": "git",
     "url": "git+https://github.com/CodeGetters/note-fe.git"
   },
-  "main": "./dist/index.js",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
@@ -35,5 +36,14 @@
   },
   "bugs": {
     "url": "https://github.com/CodeGetters/note-fe/issues"
+  },
+  "devDependencies": {
+    "rollup": "^4.21.0",
+    "rollup-plugin-glob-import": "^0.5.0",
+    "rollup-plugin-progress": "^1.1.2",
+    "rollup-plugin-swc3": "^0.11.2",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6"
   }
 }

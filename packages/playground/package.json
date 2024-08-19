@@ -6,13 +6,6 @@
   "author": "CodeGetters <reday_king@163.com>",
   "homepage": "https://github.com/CodeGetters/note-fe#readme",
   "license": "MIT",
-  "main": "lib/playground.js",
-  "directories": {
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CodeGetters/note-fe.git"
