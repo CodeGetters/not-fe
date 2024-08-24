@@ -9,11 +9,11 @@
     // 生成ECMAScript模块
     "module": "ESNext",
     // 生成声明文件
-    // "declaration": true,
+    "declaration": true,
     // 生命文件输出地址
-    // "declarationDir": "./types",
+    "declarationDir": "./types",
     // 编译后输出地址
-    // "outDir": "./dist/esm",
+    // "outDir": "./dist",
     // 生成source map
     "sourceMap": true,
     // 去除注释
@@ -21,7 +21,6 @@
     "target": "ES2015",
     // 只编译不输出
     "noEmit": true,
-    "allowImportingTsExtensions": true
   },
   "include": ["src/**/*.ts", "src/index.ts"],
   "exclude": [""]

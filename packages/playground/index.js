@@ -1,5 +1,5 @@
-// import { Promise } from "@repo/core/Promise";
-const { Promise } = require("@repo/core");
+// import { Promise } from "@repo/core";
+const Promise = require("@repo/core").Promise;
 let promise = new Promise((resolve, reject) => {
   console.log("promise resolve");
   // resolve("ok");

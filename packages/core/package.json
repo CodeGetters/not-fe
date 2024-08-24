@@ -8,8 +8,7 @@
   "homepage": "https://github.com/CodeGetters/note-fe#readme",
   "license": "MIT",
   "scripts": {
-    "dev": "tsc -w",
-    "build:esm": "tsc",
+    "check": "tsc -w",
     "build": "rollup -c",
     "test": "node ./__tests__/core.test.js"
   },
@@ -20,13 +19,13 @@
     "type": "git",
     "url": "git+https://github.com/CodeGetters/note-fe.git"
   },
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
+      "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js",
-      "import": "./dist/esm/index.esm.js"
+      "import": "./dist/index.esm.js"
     }
   },
   "bugs": {
