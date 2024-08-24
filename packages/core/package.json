@@ -19,13 +19,11 @@
     "type": "git",
     "url": "git+https://github.com/CodeGetters/note-fe.git"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.esm.js",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "default": "./dist/index.js",
-      "import": "./dist/index.esm.js"
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js"
     }
   },
   "bugs": {
@@ -42,6 +40,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-progress": "^1.1.2",
     "rollup-plugin-swc3": "^0.11.2",
-    "rollup-plugin-terser": "^7.0.2"
+    "rollup-plugin-terser": "^7.0.2",
+    "tslib": "^2.7.0"
   }
 }
