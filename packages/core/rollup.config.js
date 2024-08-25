@@ -7,7 +7,7 @@ import { terser } from "rollup-plugin-terser";
 
 export default {
   input: "src/index.ts",
-  /*构建两套，一个 umd 通用的，一个 ES 模块的，webpack 等可以直接用 ES 的，便于代码提示*/
+  /*构建三套，一个 umd 通用的，一个 ES 模块的，一个 cjs 模块的，webpack 等可以直接用 ES 的，便于代码提示*/
   output: [
     {
       // dir: "./dist/umd/",
@@ -20,6 +20,12 @@ export default {
       // dir: "dist/esm",
       file: "dist/index.esm.js",
       format: "esm",
+      sourcemap: true,
+    },
+    {
+      // dir: "dist/cjs",
+      file: "dist/index.cjs.js",
+      format: "cjs",
       sourcemap: true,
     },
   ],

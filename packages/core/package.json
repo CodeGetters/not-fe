@@ -2,14 +2,13 @@
   "name": "@repo/core",
   "version": "0.0.0",
   "private": "false",
-  "type": "module",
   "description": "> TODO: description",
   "author": "CodeGetters <reday_king@163.com>",
   "homepage": "https://github.com/CodeGetters/note-fe#readme",
   "license": "MIT",
   "scripts": {
     "check": "tsc -w",
-    "build": "rollup -c",
+    "build": "rollup -c --bundleConfigAsCjs",
     "test": "node ./__tests__/core.test.js"
   },
   "files": [
@@ -23,7 +22,8 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/index.esm.js",
-      "require": "./dist/index.js"
+      "require": "./dist/index.cjs.js",
+      "default": "./dist/index.js"
     }
   },
   "bugs": {
@@ -32,6 +32,7 @@
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
+    "promises-aplus-tests": "^2.1.2",
     "rollup": "^4.21.0",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-clear": "^2.0.7",

@@ -1,5 +1,5 @@
 {
-  "name": "@repo/playground",
+  "name": "@repo/playground-umd",
   "version": "0.0.0",
   "type": "module",
   "description": "> TODO: description",
@@ -17,6 +17,6 @@
     "url": "https://github.com/CodeGetters/note-fe/issues"
   },
   "dependencies": {
-    "@repo/core":"workspace:*"
+    "@repo/core": "workspace:*"
   }
 }
