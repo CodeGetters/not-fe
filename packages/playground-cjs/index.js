@@ -1,4 +1,4 @@
-// const Promise = require("@repo/core").Promise;
+const Promise = require("@repo/core").Promise;
 // let promise = new Promise((resolve, reject) => {
 //   console.log("promise resolve");
 //   // resolve("ok");
@@ -25,16 +25,14 @@
 //   });
 // })();
 
-let promise = new Promise((resolve, reject) => {
+let promise1 = new Promise((resolve, reject) => {
   console.log("promise resolve");
   setTimeout(() => {
     resolve("ok");
   }, 1000);
 });
 
-console.log("promise start");
-
-promise
+promise1
   .then(
     (value) => {
       console.log(value);
@@ -48,13 +46,10 @@ promise
     console.log("finally", res);
   });
 
-(() => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("ok");
-      reject("error");
-    }, 2000);
-  }).then((res) => {
-    console.log(res);
-  });
-})();
+let promise2 = new Promise((resolve, reject) => {
+  resolve("ok");
+}).then((res) => {
+  console.log(res);
+});
+
+console.log(Promise.all([promise1, promise2]));

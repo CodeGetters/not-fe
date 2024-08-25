@@ -23,6 +23,9 @@ class Promise {
      * 状态修改不可逆
      */
     let resolve = (value) => {
+      if (value instanceof Promise) {
+        return value.then(resolve, reject);
+      }
       if (this.status === STATUS.PENDING) {
         this.status = STATUS.FULFILLED;
         this.value = value;
@@ -31,7 +34,7 @@ class Promise {
       }
     };
     let reject = (reason) => {
-      if (this.status === STATUS.REJECTED) {
+      if (this.status === STATUS.PENDING) {
         this.status = STATUS.REJECTED;
         this.reason = reason;
         // 依次执行 onRejectCall 中的函数
@@ -44,7 +47,7 @@ class Promise {
       reject(error);
     }
   }
-  #resolveThen(newPromise, x, resolve, reject) {
+  private resolveThen(newPromise, x, resolve, reject) {
     /**
      * 返回值可能是一个普通值或者是一个 Promise
      * 所以需要判断并分别进行处理
@@ -65,35 +68,39 @@ class Promise {
         if (typeof promiseThen === "function") {
           promiseThen.call(
             x,
-            (newResolve) => {
+            (y) => {
               if (called) return;
               called = true;
-              resolve(newResolve);
+              this.resolveThen(newPromise, y, resolve, reject);
             },
-            (newReject) => {
+            (r) => {
               if (called) return;
               called = true;
-              reject(newReject);
+              reject(r);
             },
           );
         } else {
-          if (called) return;
-          called = true;
-          reject(x);
+          resolve(x);
         }
       } catch (error) {
+        if (called) return;
+        called = true;
         reject(error);
       }
     } else {
       resolve(x);
     }
   }
-  then(onFulfilled: (value) => void, onRejected: (reason) => void) {
+  then(onFulfilled?: (value) => void, onRejected?: (reason) => void) {
     // then 的参数可以缺省
     onFulfilled =
       typeof onFulfilled === "function" ? onFulfilled : (value) => value;
     onRejected =
-      typeof onRejected === "function" ? onRejected : (reason) => reason;
+      typeof onRejected === "function"
+        ? onRejected
+        : (error) => {
+            throw error;
+          };
 
     // 每次调用 then 时，会创建一个新的 Promise 对象
     const newPromise = new Promise((resolve, reject) => {
@@ -105,7 +112,7 @@ class Promise {
         setTimeout(() => {
           try {
             const x = onFulfilled(this.value);
-            this.#resolveThen(newPromise, x, resolve, reject);
+            this.resolveThen(newPromise, x, resolve, reject);
           } catch (error) {
             reject(error);
           }
@@ -115,7 +122,7 @@ class Promise {
         setTimeout(() => {
           try {
             const x = onRejected(this.reason);
-            this.#resolveThen(newPromise, x, resolve, reject);
+            this.resolveThen(newPromise, x, resolve, reject);
           } catch (error) {
             reject(error);
           }
@@ -123,26 +130,97 @@ class Promise {
       }
       if (this.status === STATUS.PENDING) {
         this.onResolveCall.push(() => {
-          try {
-            const x = onFulfilled(this.value);
-            this.#resolveThen(newPromise, x, resolve, reject);
-          } catch (error) {
-            reject(error);
-          }
+          setTimeout(() => {
+            try {
+              const x = onFulfilled(this.value);
+              this.resolveThen(newPromise, x, resolve, reject);
+            } catch (error) {
+              reject(error);
+            }
+          }, 0);
         });
         this.onRejectCall.push(() => {
-          try {
-            const x = onRejected(this.reason);
-            this.#resolveThen(newPromise, x, resolve, reject);
-          } catch (error) {
-            reject(error);
-          }
+          setTimeout(() => {
+            try {
+              const x = onRejected(this.reason);
+              this.resolveThen(newPromise, x, resolve, reject);
+            } catch (error) {
+              reject(error);
+            }
+          }, 0);
         });
       }
-      return newPromise;
+    });
+    return newPromise;
+  }
+  static resolve(value) {
+    return new Promise((resolve) => {
+      resolve(value);
     });
   }
-  catch(reason) {}
+  static reject(reason) {
+    return new Promise((_, reject) => {
+      reject(reason);
+    });
+  }
+  catch(errorCall) {
+    return this.then(null, errorCall);
+  }
+  finally(callback) {
+    return this.then(
+      (value) => {
+        return Promise.resolve(callback()).then(() => value);
+      },
+      (reason) => {
+        return Promise.reject(callback()).then(() => reason);
+      },
+    );
+  }
+  static all(promises: Promise[]) {
+    if (!Array.isArray(promises))
+      return new TypeError("Promise.all 参数必须是数组");
+    return new Promise((resolve, reject) => {
+      let count = 0;
+      const results = [];
+      promises.map((promise, i) => {
+        Promise.resolve(promise).then((val) => {
+          results[i] = val;
+          count++;
+          if (count === promises.length) resolve(results);
+        }, reject);
+      });
+    });
+  }
+  static allSettled(promises: Promise[]) {
+    if (!Array.isArray(promises))
+      return new TypeError("Promise.allSettled 参数必须是数组");
+    return new Promise((resolve, reject) => {
+      let count = 0;
+      const results = [];
+      promises.map((promise, i) => {
+        Promise.resolve(promise)
+          .then((val) => {
+            results[i] = { status: STATUS.FULFILLED, val };
+          })
+          .catch((reason) => {
+            results[i] = { status: STATUS.REJECTED, reason };
+          })
+          .finally(() => {
+            count++;
+            if (count === promises.length) resolve(results);
+          });
+      });
+    });
+  }
+  static race(promises: Promise[]) {
+    if (!Array.isArray(promises))
+      return new TypeError("Promise.race 参数必须是数组");
+    return new Promise((resolve, reject) => {
+      promises.map((promise) => {
+        Promise.resolve(promise).then(resolve, reject);
+      });
+    });
+  }
 }
 
 export default Promise;
