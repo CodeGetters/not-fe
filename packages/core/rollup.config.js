@@ -18,7 +18,7 @@ export default {
     },
     {
       // dir: "dist/esm",
-      file: "dist/index.esm.js",
+      file: "dist/index.esm.mjs",
       format: "es",
       sourcemap: true,
       exports: "named",
@@ -36,6 +36,7 @@ export default {
     resolve(),
     commonjs(),
     /*压缩代码*/
+    // TODO terser
     terser(),
     /*babel 处理*/
     babel({
