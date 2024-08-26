@@ -31,7 +31,7 @@ export default {
   ],
   plugins: [
     /*打包之前清除 dist 目录*/
-    clear({ target: ["dist"] }),
+    clear({ targets: ["dist"] }),
     resolve(),
     commonjs(),
     /*压缩代码*/

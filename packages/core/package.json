@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "check": "tsc -w",
-    "build": "rollup -c --bundleConfigAsCjs",
+    "build": "cross-env NODE_ENV=production && rollup -c --bundleConfigAsCjs",
     "test": "node ./__tests__/core.test.js"
   },
   "files": [
@@ -30,17 +30,16 @@
     "url": "https://github.com/CodeGetters/note-fe/issues"
   },
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.4",
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
     "@rollup/plugin-typescript": "^11.1.6",
+    "cross-env": "^7.0.3",
     "promises-aplus-tests": "^2.1.2",
     "rollup": "^4.21.0",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-clear": "^2.0.7",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-glob-import": "^0.5.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-progress": "^1.1.2",
-    "rollup-plugin-swc3": "^0.11.2",
     "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.7.0"
   }
