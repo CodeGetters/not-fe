@@ -9,8 +9,8 @@
     "lint-staged": "npx lint-staged",
     "prepare": "husky",
     "format": "prettier --write ./**/*.{vue,ts,tsx,js,jsx,css,less,scss,json,md}",
-    "start": "turbo run dev --filter=@repo/core",
     "build": "turbo run build",
+    "dev": "turbo run dev",
     "test": "jest",
     "check-types": "tsc --noEmit"
   },

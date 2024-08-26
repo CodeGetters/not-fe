@@ -1,7 +1,9 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
-    "dev": { "cache": true },
+    "dev": {
+      "cache": true
+    },
     "build": {
       "cache": false
     }

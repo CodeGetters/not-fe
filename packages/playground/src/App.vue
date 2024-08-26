@@ -1,69 +1,71 @@
 <script setup lang="ts">
-import { nextTick } from "vue";
+import { stat } from "fs";
+import { computed, nextTick, onMounted, reactive, ref } from "vue";
 
-interface IVirtualList {
-  dataSource: any[];
-  // [k: string]: number | any[]
-  itemHeight: number;
-  viewHeight: number;
-  maxCount: number;
-}
-class VirtualList {
-  state: IVirtualList;
-  scrollStyle: any;
-  startIndex: number;
-  endIndex: number;
-  renderList: any[];
-  container: HTMLElement | null;
-  list: HTMLElement | null;
-  constructor(containerSel: string, listSel: string) {
-    this.state = {
-      dataSource: [], // 模拟数据源
-      itemHeight: 100, // 固定 item 高度
-      viewHeight: 0, // container 高度
-      maxCount: 0, // 视图最大容纳量
-    };
-    this.scrollStyle = {}; // list 动态样式（高度，偏移）
-    this.startIndex = 0; // 当前视图列表在数据源中的起始索引
-    this.endIndex = 0; // 当前视图列表在数据源中的末尾索引
-    this.renderList = []; // 渲染在视图上的列表项
+const dataSource: number[] = [];
 
-    // 根据用户传入的选择器获取 DOM 并保存
-    this.container = document.querySelector(containerSel);
-    this.list = document.querySelector(listSel);
+const listItem = ref(null);
+const listContainer = ref<HTMLElement | null>(null);
+
+const state = reactive({
+  startIndex: 0,
+  itemHeight: 100,
+  viewHeight: 0,
+  maxCount: 0,
+});
+const endIndex = computed(() => {
+  const end = state.startIndex + state.maxCount;
+  return dataSource[end] ? dataSource[end] : dataSource.length;
+});
+const scrollStyle = computed(() => {
+  return {
+    height: `${dataSource.length * state.itemHeight - state.startIndex * state.itemHeight}px`,
+    transform: `translate3d(0, ${state.startIndex * state.itemHeight}px, 0)`,
+  };
+});
+const renderList = computed(() => {
+  return dataSource.slice(state.startIndex, endIndex.value);
+});
+
+const bindEvent = () => {
+  listContainer.value?.addEventListener("scroll", () => {
+    console.log("----------scroll----------");
+  });
+};
+const addData = () => {
+  for (let i = 0; i < 10; i++) {
+    dataSource.push(dataSource.length + 1);
   }
-  init() {
-    if (this.container) {
-      this.state.viewHeight = this.container!.offsetHeight;
-      this.state.maxCount =
-        Math.ceil(this.state.viewHeight / this.state.itemHeight) + 1;
-      console.log(this.state.maxCount);
-    }
+};
+
+const render = () => {
+  if (endIndex.value > dataSource.length) {
+    addData();
   }
-  computedEndIndex() {
-    const end = this.startIndex + this.state.maxCount;
-    this.endIndex = this.state.dataSource[end]
-      ? end
-      : this.state.dataSource.length;
+  renderList;
+};
+
+const init = () => {
+  if (listContainer.value) {
+    state.viewHeight = listContainer.value.offsetHeight;
+    state.maxCount = Math.ceil(state.viewHeight / state.itemHeight) + 1;
+    bindEvent();
+    render();
   }
-  computedRenderList() {
-    this.renderList = this.state.dataSource.slice(
-      this.startIndex,
-      this.endIndex,
-    );
-  }
-}
-nextTick(() => {
-  const vir = new VirtualList(".virtual-list-box", ".virtual-list-list");
-  vir.init();
+};
+
+onMounted(() => {
+  nextTick(() => {
+    init();
+  });
 });
 </script>
 
 <template>
   <div class="container">
     <div class="virtual-list-box">
-      <div class="virtual-list-list">
-        <div class="virtual-list-item"></div>
+      <div class="virtual-list-list" ref="listContainer">
+        <div class="virtual-list-item" ref="listItem"></div>
       </div>
     </div>
   </div>
