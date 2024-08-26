@@ -19,8 +19,9 @@ export default {
     {
       // dir: "dist/esm",
       file: "dist/index.esm.js",
-      format: "esm",
+      format: "es",
       sourcemap: true,
+      exports: "named",
     },
     {
       // dir: "dist/cjs",

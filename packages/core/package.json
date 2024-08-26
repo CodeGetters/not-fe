@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "check": "tsc -w",
+    "dev":"rollup -c -w --bundleConfigAsCjs",
     "build": "cross-env NODE_ENV=production && rollup -c --bundleConfigAsCjs",
     "test": "node ./__tests__/core.test.js"
   },
@@ -22,8 +23,7 @@
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/index.esm.js",
-      "require": "./dist/index.cjs.js",
-      "default": "./dist/index.js"
+      "require": "./dist/index.cjs.js"
     }
   },
   "bugs": {
