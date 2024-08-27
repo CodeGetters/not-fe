@@ -1,4 +1,4 @@
-import { Promise } from "@repo/core";
+import { Promise, EventBus } from "@repo/core";
 // let promise = new Promise((resolve, reject) => {
 //   console.log("promise resolve");
 //   // resolve("ok");
@@ -25,36 +25,45 @@ import { Promise } from "@repo/core";
 //   });
 // })();
 
-let promise = new Promise((resolve, reject) => {
-  console.log("promise resolve");
-  setTimeout(() => {
-    resolve("ok");
-  }, 1000);
+// let promise = new Promise((resolve, reject) => {
+//   console.log("promise resolve");
+//   setTimeout(() => {
+//     resolve("ok");
+//   }, 1000);
+// });
+
+// console.log("promise start");
+
+// promise
+//   .then(
+//     (value) => {
+//       console.log(value);
+//       return "1";
+//     },
+//     (error) => {
+//       console.log(error);
+//     },
+//   )
+//   .then((res) => {
+//     console.log("finally", res);
+//   });
+
+// (() => {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       resolve("ok");
+//       reject("error");
+//     }, 2000);
+//   }).then((res) => {
+//     console.log(res);
+//   });
+// })();
+
+const e = new EventBus();
+// 监听
+e.on("age", (age) => {
+  console.log(age, "第一个");
 });
-
-console.log("promise start");
-
-promise
-  .then(
-    (value) => {
-      console.log(value);
-      return "1";
-    },
-    (error) => {
-      console.log(error);
-    },
-  )
-  .then((res) => {
-    console.log("finally", res);
-  });
-
-(() => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve("ok");
-      reject("error");
-    }, 2000);
-  }).then((res) => {
-    console.log(res);
-  });
-})();
+// 触发
+e.emit("age");
+console.log("--------------");

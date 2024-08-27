@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { stat } from "fs";
 import { computed, nextTick, onMounted, reactive, ref } from "vue";
 
 const dataSource: number[] = [];
