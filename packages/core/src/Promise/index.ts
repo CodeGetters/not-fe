@@ -180,13 +180,11 @@ class Promise {
     if (!Array.isArray(promises))
       return new TypeError("Promise.all 参数必须是数组");
     return new Promise((resolve, reject) => {
-      let count = 0;
       const results = [];
       promises.map((promise, i) => {
         Promise.resolve(promise).then((val) => {
           results[i] = val;
-          count++;
-          if (count === promises.length) resolve(results);
+          if (i === promises.length - 1) resolve(results);
         }, reject);
       });
     });
