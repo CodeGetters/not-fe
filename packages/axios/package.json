@@ -1,0 +1,19 @@
+{
+  "name": "@repo/axios",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "> TODO: description",
+  "author": "CodeGetters <reday_king@163.com>",
+  "homepage": "https://github.com/CodeGetters/note-fe#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodeGetters/note-fe.git"
+  },
+  "scripts": {
+    "test": "node ./__tests__/playground.test.js"
+  },
+  "bugs": {
+    "url": "https://github.com/CodeGetters/note-fe/issues"
+  }
+}
