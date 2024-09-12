@@ -33,6 +33,12 @@ class Promise {
         this.onResolveCall.forEach((fn) => fn());
       }
     };
+    /**
+     * resolve和reject为什么要用箭头函数？
+     * 如果直接调用的话，普通函数this指向的是window或者undefined
+     * 用箭头函数就可以让this指向当前实例对象
+     * @param reason
+     */
     let reject = (reason) => {
       if (this.status === STATUS.PENDING) {
         this.status = STATUS.REJECTED;
