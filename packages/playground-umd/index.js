@@ -198,40 +198,61 @@
 // }
 // console.log(a, b, c);
 
-function foo(a) {
-  return function (b) {
-    return function (c) {
-      return a + b + c;
-    };
-  };
-}
+// function foo(a) {
+//   return function (b) {
+//     return function (c) {
+//       return a + b + c;
+//     };
+//   };
+// }
 
-console.log(foo(1)(2)(3));
+// console.log(foo(1)(2)(3));
 
-function curry(fn, args) {
+// function curry(fn, args) {
+//   const len = fn.length;
+//   args = args || [];
+
+//   return function () {
+//     let _args = args.slice(0),
+//       arg,
+//       i;
+//     for (i = 0; i < arguments.length; i++) {
+//       arg = arguments[i];
+//       _args.push(arg);
+//     }
+//     if (_args.length < len) {
+//       return curry.call(this, fn, _args);
+//     } else {
+//       return fn.apply(this, _args);
+//     }
+//   };
+// }
+
+// function multiFn(a, b, c, d) {
+//   return a * b * c * d;
+// }
+
+// var multi = curry(multiFn);
+
+// console.log(multi(1)(2)(3)(4)); // 24
+
+function carry(fn, args) {
   const len = fn.length;
   args = args || [];
-
   return function () {
-    let _args = args.slice(0),
-      arg,
-      i;
-    for (i = 0; i < arguments.length; i++) {
-      arg = arguments[i];
-      _args.push(arg);
-    }
+    let _args = args.slice(0);
+    let arg, i;
+    arguments.map((item) => {
+      _args.push(item);
+    });
     if (_args.length < len) {
-      return curry.call(this, fn, _args);
+      return carry.call(this, fn, _args);
     } else {
       return fn.apply(this, _args);
     }
   };
 }
-
 function multiFn(a, b, c, d) {
   return a * b * c * d;
 }
-
-var multi = curry(multiFn);
-
-console.log(multi(1)(2)(3)(4)); // 24
+console.log(carry(multiFn));
