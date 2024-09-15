@@ -236,23 +236,26 @@
 
 // console.log(multi(1)(2)(3)(4)); // 24
 
-function carry(fn, args) {
-  const len = fn.length;
-  args = args || [];
-  return function () {
-    let _args = args.slice(0);
-    let arg, i;
-    arguments.map((item) => {
-      _args.push(item);
-    });
-    if (_args.length < len) {
-      return carry.call(this, fn, _args);
-    } else {
-      return fn.apply(this, _args);
+function curry(fn) {
+  // curriedFn 为柯里化生产的新函数
+  // 为什么不使用匿名函数？因为如果传入参数 args.length 小于 fn 函数的形参个数 fn.length，需要重新递归
+  return function curriedFn(...args) {
+    if (args.length < fn.length) {
+      return function () {
+        // 之前传入的参数都储存在 args 中
+        // 新函数参入参数在 arguments，因为 arguments 并非真正的数组需要 Array.from() 转换成数组
+        // 递归执行，重复之前的过程
+        return curriedFn(...args.concat(Array.from(arguments)));
+      };
     }
+    return fn(...args);
   };
 }
-function multiFn(a, b, c, d) {
-  return a * b * c * d;
+function sum(a, b, c) {
+  return a + b + c;
 }
-console.log(carry(multiFn));
+// 定义一个柯里化函数
+const curried = curry(sum);
+
+// 如果输入了全部的参数，则立即返回结果
+console.log(curried(1, 2, 3)); // 6

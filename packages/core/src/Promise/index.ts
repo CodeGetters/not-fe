@@ -15,6 +15,10 @@ class Promise {
     this.status = STATUS.PENDING;
     this.reason = undefined;
     this.value = undefined;
+    /**
+     * 因为不知道后面状态的变化情况，所以将成功回调和失败回调存储起来
+     * 等到执行成功失败函数的时候再传递
+     */
     this.onResolveCall = [];
     this.onRejectCall = [];
     /**
@@ -199,7 +203,6 @@ class Promise {
     if (!Array.isArray(promises))
       return new TypeError("Promise.allSettled 参数必须是数组");
     return new Promise((resolve, reject) => {
-      let count = 0;
       const results = [];
       promises.map((promise, i) => {
         Promise.resolve(promise)
@@ -210,8 +213,7 @@ class Promise {
             results[i] = { status: STATUS.REJECTED, reason };
           })
           .finally(() => {
-            count++;
-            if (count === promises.length) resolve(results);
+            if (i === promises.length - 1) resolve(results);
           });
       });
     });

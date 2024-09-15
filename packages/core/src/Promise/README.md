@@ -13,3 +13,5 @@ pnpm dlx promises-aplus-tests Promise/test.js
 ## 参考
 
 [什么？？？到现在你都还不会手写Promise！](https://juejin.cn/post/7395868215622713356)
+[从一道让我失眠的 Promise 面试题开始，深入分析 Promise 实现细节](https://juejin.cn/post/6945319439772434469#heading-31)
+[What is the difference between returned Promise?](https://stackoverflow.com/questions/58217603/what-is-the-difference-between-returned-promise)
