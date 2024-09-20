@@ -227,6 +227,23 @@ class Promise {
       });
     });
   }
+  static any(promises: Promise[]) {
+    if (!Array.isArray(promises))
+      return new TypeError("Promise.any 参数必须是数组");
+    return new Promise((resolve, reject) => {
+      const errors = [];
+      promises.map((item, i) => {
+        Promise.resolve(item)
+          .then((val) => {
+            resolve(val);
+          })
+          .catch((err) => {
+            errors[i] = err;
+            if (i === promises.length - 1) reject(errors);
+          });
+      });
+    });
+  }
 }
 
 export default Promise;
