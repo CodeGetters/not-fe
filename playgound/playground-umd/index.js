@@ -51,12 +51,15 @@
 // (() => {
 //   return new Promise((resolve, reject) => {
 //     setTimeout(() => {
-//       resolve("ok");
 //       reject("error");
 //     }, 2000);
-//   }).then((res) => {
-//     console.log(res);
-//   });
+//   })
+//     .then((res) => {
+//       console.log(res);
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     });
 // })();
 
 // const e = new EventBus();
@@ -236,26 +239,57 @@
 
 // console.log(multi(1)(2)(3)(4)); // 24
 
-function curry(fn) {
-  // curriedFn 为柯里化生产的新函数
-  // 为什么不使用匿名函数？因为如果传入参数 args.length 小于 fn 函数的形参个数 fn.length，需要重新递归
-  return function curriedFn(...args) {
-    if (args.length < fn.length) {
-      return function () {
-        // 之前传入的参数都储存在 args 中
-        // 新函数参入参数在 arguments，因为 arguments 并非真正的数组需要 Array.from() 转换成数组
-        // 递归执行，重复之前的过程
-        return curriedFn(...args.concat(Array.from(arguments)));
-      };
-    }
-    return fn(...args);
-  };
-}
-function sum(a, b, c) {
-  return a + b + c;
-}
-// 定义一个柯里化函数
-const curried = curry(sum);
+// function curry(fn) {
+//   // curriedFn 为柯里化生产的新函数
+//   // 为什么不使用匿名函数？因为如果传入参数 args.length 小于 fn 函数的形参个数 fn.length，需要重新递归
+//   return function curriedFn(...args) {
+//     if (args.length < fn.length) {
+//       return function () {
+//         // 之前传入的参数都储存在 args 中
+//         // 新函数参入参数在 arguments，因为 arguments 并非真正的数组需要 Array.from() 转换成数组
+//         // 递归执行，重复之前的过程
+//         return curriedFn(...args.concat(Array.from(arguments)));
+//       };
+//     }
+//     return fn(...args);
+//   };
+// }
+// function sum(a, b, c) {
+//   return a + b + c;
+// }
+// // 定义一个柯里化函数
+// const curried = curry(sum);
 
-// 如果输入了全部的参数，则立即返回结果
-console.log(curried(1, 2, 3)); // 6
+// // 如果输入了全部的参数，则立即返回结果
+// console.log(curried(1, 2, 3)); // 6
+
+class Person {
+  constructor() {
+    this.promise = Promise.resolve();
+  }
+  eat(something) {
+    this.promise = this.promise.then(() => {
+      console.log(`eat ${something}`);
+      return this;
+    });
+    return this;
+  }
+  sleep(time) {
+    this.promise = this.promise.then(
+      () =>
+        new Promise((resolve) => {
+          setTimeout(resolve, time);
+        }),
+    );
+    return this;
+  }
+}
+
+const person = new Person();
+person
+  .eat("breakfast")
+  .sleep(1000)
+  .eat("lunch")
+  .sleep(2000)
+  .sleep(3000)
+  .eat("dinner");
