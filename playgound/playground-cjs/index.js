@@ -62,8 +62,8 @@ const object = { a: [{ b: { c: 3 } }] };
 // console.log("1.", get(object, "a[0].b.c"));
 // console.log("2.", get(object, ["a", "0", "b", "c"]));
 //=> 3
-// get(object, 'a[0]["b"]["c"]');
-// console.log("3.", get(object, 'a[0]["b"]["c"]'));
+get(object, 'a[0]["b"]["c"]');
+console.log("3.", get(object, 'a[0]["b"]["c"]'));
 
 //=> 'default'
 // get(object, "a[100].b.c", "default");
@@ -210,3 +210,117 @@ function add(a, b, c) {
 }
 const curriedAdd = curry(add);
 console.log("curry", curriedAdd(1)(2, 3));
+
+function reverseStr(str) {
+  if (typeof str !== "string") {
+    return str;
+  }
+  const len = str.length;
+  if (len <= 1) {
+    return str;
+  }
+  let newStr = "",
+    res = "";
+  // for (let i = 0; i < len; i++) {
+  //   if (str[i] !== " " && str[i] !== ".") {
+  //     newStr += str[i];
+  //   } else {
+  //     if (newStr !== "") {
+  //       res = res + newStr.split("").reverse().join("") + str[i];
+  //       newStr = "";
+  //     } else {
+  //       res += str[i];
+  //     }
+  //   }
+  // }
+  const newStrArr = str.split(".");
+  for (let i = 0; i < newStrArr.length; i++) {
+    if (newStrArr[i] && newStrArr[i] !== " ") {
+      res += newStrArr[i].split("").reverse().join("");
+    } else {
+      newStrArr[i] === "" ? (res += ".") : (res += " ");
+    }
+  }
+  return res;
+}
+
+console.log(reverseStr("..abc...123.."));
+
+function myInstanceOf(left, right) {
+  if ((typeof left !== "object" && typeof left !== "function") || left === null)
+    return false;
+
+  // 获取 left 的原型
+  let proto = Object.getPrototypeOf(left);
+  // 获取 right 的 prototype 属性
+  let prototype = right.prototype;
+  // 循环遍历原型链
+  while (true) {
+    // 如果到达原型链顶端仍未找到匹配，返回 false
+    if (!proto) return false;
+    // 如果找到匹配的原型，返回 true
+    if (proto === prototype) return true;
+    // 继续向上查找原型链
+    proto = Object.getPrototypeOf(proto);
+  }
+}
+
+const obj = {};
+
+console.log(myInstanceOf(obj, Object));
+
+class EventBus {
+  constructor() {
+    this.events = {};
+  }
+  on(eventName, eventFn) {
+    const eventFns = this.events[eventName];
+    if (!eventFns) {
+      this.events[eventName] = [];
+    }
+    this.events[eventName].push(eventFn);
+  }
+  off(eventName, eventFn) {
+    const eventFns = this.events[eventName];
+    if (!eventFns) return;
+    for (let i = 0; i < eventFns.length; i++) {
+      if (eventFns[i] === eventFn) {
+        eventFns.splice(i, 1);
+        break;
+      }
+    }
+    if (eventFns.length === 0) {
+      delete this.eventFns[eventName];
+    }
+  }
+  emit(eventName, ...args) {
+    const eventFns = this.events[eventName];
+    if (!eventFns) return;
+    eventFns.forEach((fn) => fn(...args));
+  }
+}
+
+console.log(parseInt("10+15", 2));
+
+let a = 1;
+function fn(f = () => 1) {
+  let a = 2;
+  console.log(f());
+}
+fn();
+
+let obj1 = {
+  value: "111",
+};
+
+let obj2 = {
+  value: "222",
+};
+
+function changeObj(obj) {
+  obj.value = "333";
+  obj = obj2;
+  return obj.value;
+}
+console.log(changeObj(obj1));
+console.log(obj1.value);
