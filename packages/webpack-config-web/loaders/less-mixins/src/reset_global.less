@@ -1,0 +1,178 @@
+@charset "utf-8";
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-focus-ring-color: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+@import "font_global";
+
+html {
+  font-family: "Noto Sans SC", sans-serif;
+}
+
+[lang|="zh-hant"],
+[lang|="zh-hans"],
+[lang|="zh-cht"],
+[lang="zh-hk"],
+[lang="zh-tw"] {
+  font-family: "Noto Sans TC", sans-serif;
+}
+
+[lang|="jp"] {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+[lang|="kr"] {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+[lang|="th"] {
+  font-family: "Noto Sans Thai", sans-serif;
+}
+
+/* CSS Document */
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu,
+select {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+fieldset,
+img,
+iframe,
+abbr {
+  border: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-style: normal;
+}
+
+strong,
+b {
+  font-weight: bold;
+  font-style: normal;
+}
+
+em {
+  font-weight: normal;
+  font-style: italic;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+li {
+  list-style: none;
+}
+
+button,
+a,
+select {
+  border: none;
+  outline: none;
+}
+
+input,
+textarea,
+button,
+a {
+  font: inherit;
+  color: inherit;
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+textarea {
+  overflow: auto;
+  resize: none;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+// chrome自动填充去掉背景色
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-transition-delay: 999999s;
+  -webkit-transition:
+    color 999999s ease-out,
+    background-color 999999s ease-out;
+}
+
+// IE低版本提醒
+#NIE-warning-dialog {
+  box-sizing: content-box !important;
+}
+
+#NIE-topBar {
+  z-index: 999 !important;
+
+  * {
+    box-sizing: content-box;
+  }
+}

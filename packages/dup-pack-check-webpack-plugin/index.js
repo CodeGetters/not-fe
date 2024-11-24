@@ -1,8 +1,8 @@
-var path = require("path");
-var findRoot = require("find-root");
-var chalk = require("chalk");
+import path from "node:path";
+import findRoot from "find-root";
+import chalk from "chalk";
+import semver from "semver";
 var _ = require("lodash");
-var semver = require("semver");
 
 const defaults = {
   verbose: false,
