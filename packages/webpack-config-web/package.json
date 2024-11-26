@@ -61,7 +61,6 @@
     "util.promisify": "1.0.0",
     "simple-git": "3.14.1",
     "fastparse": "^1.1.1",
-    "leihuo-spritesmith": "^3.4.3",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
